@@ -19,6 +19,7 @@ appdir
 /ffmpeg*
 /libplacebo*
 /sdl2-*
+/SDL3-*
 /protoc*
 /openssl*
 scripts/chiaki-ng.iss
@@ -36,6 +37,8 @@ compile_commands.json
 .gdb_history
 chiaki.conf
 /appimage
+/dist
+/build-*.log
 .cache/
 *.vscode
 site/

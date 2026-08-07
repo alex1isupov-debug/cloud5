@@ -3,6 +3,8 @@ cmake_minimum_required(VERSION 3.10)
 
 project(chiaki)
 
+set(CLOUDGTA_PLAYER_VERSION "0.1.0-lab")
+
 # Like option(), but the value can also be AUTO
 macro(tri_option name desc default)
     set("${name}" "${default}" CACHE STRING "${desc}")
@@ -43,8 +45,8 @@ set(CHIAKI_VERSION_MINOR 10)
 set(CHIAKI_VERSION_PATCH 0)
 set(CHIAKI_VERSION ${CHIAKI_VERSION_MAJOR}.${CHIAKI_VERSION_MINOR}.${CHIAKI_VERSION_PATCH})
 
-set(CPACK_PACKAGE_NAME "chiaki-ng")
-set(CPACK_PACKAGE_DESCRIPTION "Open Source PlayStation Remote Play client for Linux, Mac, and Windows")
+set(CPACK_PACKAGE_NAME "cloudgta-player")
+set(CPACK_PACKAGE_DESCRIPTION "CloudGTA Player lab client, based on chiaki-ng")
 set(CPACK_PACKAGE_VERSION_MAJOR ${CHIAKI_VERSION_MAJOR})
 set(CPACK_PACKAGE_VERSION_MINOR ${CHIAKI_VERSION_MINOR})
 set(CPACK_PACKAGE_VERSION_PATCH ${CHIAKI_VERSION_PATCH})

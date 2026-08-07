@@ -565,10 +565,10 @@ void QmlMainWindow::setSettings(Settings *new_settings)
     settings = new_settings;
     QString profile = settings->GetCurrentProfile();
     qCCritical(chiakiGui) << "Current Profile: " << profile;
-    if(profile.isEmpty())
-        QGuiApplication::setApplicationDisplayName("chiaki-ng");
-    else
-        QGuiApplication::setApplicationDisplayName(QString("chiaki-ng:%1").arg(profile));
+	if(profile.isEmpty())
+		QGuiApplication::setApplicationDisplayName("CloudGTA Player");
+	else
+		QGuiApplication::setApplicationDisplayName(QString("CloudGTA Player: %1").arg(profile));
     this->setTitle(QGuiApplication::applicationDisplayName());
 }
 
