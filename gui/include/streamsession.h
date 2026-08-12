@@ -70,6 +70,7 @@ typedef struct haptic_packet_t
 		Settings *settings;
 		QMap<Qt::Key, int> key_map;
 		Decoder decoder;
+		RenderBackend render_backend;
 		QString hw_decoder;
 		AVBufferRef *hw_device_ctx;
 		QString audio_out_device;

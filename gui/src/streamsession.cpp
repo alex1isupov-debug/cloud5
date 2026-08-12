@@ -88,6 +88,7 @@ StreamSessionConnectInfo::StreamSessionConnectInfo(
 {
 	key_map = settings->GetControllerMappingForDecoding();
 	decoder = settings->GetDecoder();
+	render_backend = settings->GetRenderBackend();
 	hw_decoder = settings->GetHardwareDecoder();
 	hw_device_ctx = nullptr;
 	audio_out_device = settings->GetAudioOutDevice();

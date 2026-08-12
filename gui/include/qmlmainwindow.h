@@ -112,6 +112,7 @@ public:
     void setStreamWindowAdjustable(bool adjustable) { is_stream_window_adjustable = adjustable; }
 
     QmlBackend *getBackend();
+    StreamSession *getStreamSession() const { return session; }
 
     VideoPreset videoPreset() const;
     void setVideoPreset(VideoPreset mode);
@@ -192,6 +193,7 @@ private:
     bool amd_card = false;
     bool nvidia_card = false;
     bool direct_stream = false;
+    bool render_backend_forced = false;
     bool keep_video = false;
     RenderBackend render_backend = RenderBackend::Vulkan;
     int grab_input = 0;

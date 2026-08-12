@@ -19,6 +19,7 @@ int main(int argc, char *argv[]) { return real_main(argc, argv); }
 #include <controllermanager.h>
 #include <discoverymanager.h>
 #include <qmlmainwindow.h>
+#include <cloudgtahost.h>
 #include <QApplication>
 #include <QtTypes>
 
@@ -134,7 +135,24 @@ int real_main(int argc, char *argv[])
 	QCommandLineParser parser;
 	parser.setOptionsAfterPositionalArgumentsMode(QCommandLineParser::ParseAsPositionalArguments);
 	parser.addHelpOption();
-	
+
+#ifdef CHIAKI_CLOUDGTA_MANAGED_HOST_ONLY
+	QCommandLineOption cloudgta_host_protocol_option("cloudgta-host-protocol", "Managed CloudGTA host protocol version.", "version");
+	parser.addOption(cloudgta_host_protocol_option);
+	QCommandLineOption cloudgta_host_self_test_option("cloudgta-host-self-test", "Validate the managed host parser without starting Remote Play.");
+	parser.addOption(cloudgta_host_self_test_option);
+	parser.process(app);
+	Settings settings(QString{});
+	if(parser.isSet(cloudgta_host_self_test_option))
+		return CloudGTAHostSelfTest();
+	if(parser.isSet(cloudgta_host_protocol_option))
+	{
+		if(parser.value(cloudgta_host_protocol_option) != QStringLiteral("1"))
+			return CloudGTAHostFail(QStringLiteral("unsupported_protocol"));
+		return RunCloudGTAHost(app, &settings);
+	}
+	return CloudGTAHostFail(QStringLiteral("managed_protocol_required"));
+#else
 	QStringList cmds;
 	cmds.append("stream");
 	cmds.append("list");
@@ -313,6 +331,7 @@ int real_main(int argc, char *argv[])
 	{
 		parser.showHelp(1);
 	}
+#endif
 }
 
 int RunMain(QGuiApplication &app, Settings *settings, bool exit_app_on_stream_exit)

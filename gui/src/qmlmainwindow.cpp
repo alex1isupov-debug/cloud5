@@ -325,6 +325,8 @@ QmlMainWindow::QmlMainWindow(const StreamSessionConnectInfo &connect_info)
     , settings(connect_info.settings)
 {
     direct_stream = true;
+    render_backend_forced = true;
+    render_backend = connect_info.render_backend;
     emit directStreamChanged();
     init(connect_info.settings);
     backend->createSession(connect_info);
@@ -1445,7 +1447,8 @@ void QmlMainWindow::doneOpenGLContextCurrent()
 
 void QmlMainWindow::init(Settings *settings, bool exit_app_on_stream_exit)
 {
-    render_backend = settings->GetRenderBackend();
+    if (!render_backend_forced)
+        render_backend = settings->GetRenderBackend();
     setSurfaceType(render_backend == RenderBackend::Vulkan ? QWindow::VulkanSurface : QWindow::OpenGLSurface);
     qparams = {};
     qparams.drift_compensation = 1e-3;

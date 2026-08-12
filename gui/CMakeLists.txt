@@ -22,6 +22,8 @@ endif()
 set(SOURCE_FILES
 	include/exception.h
 	src/main.cpp
+	include/cloudgtahost.h
+	src/cloudgtahost.cpp
 	include/discoverymanager.h
 	src/discoverymanager.cpp
 	include/streamsession.h
@@ -99,6 +101,7 @@ target_link_libraries(placebo-libav-impl PkgConfig::LIBPLACEBO FFMPEG::avcodec F
 target_link_libraries(chiaki PkgConfig::LIBPLACEBO placebo-libav-impl)
 
 target_link_libraries(chiaki chiaki-lib)
+target_compile_definitions(chiaki PRIVATE CHIAKI_CLOUDGTA_MANAGED_HOST_ONLY)
 if(CHIAKI_ENABLE_CLI)
 	add_definitions(-DCHIAKI_ENABLE_CLI)
 	target_link_libraries(chiaki chiaki-cli-lib)
@@ -144,7 +147,7 @@ endif()
 
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fanalyzer")
 set_target_properties(chiaki PROPERTIES
-		OUTPUT_NAME cloudgta-player
+		OUTPUT_NAME cloudgta-remoteplay-host
 		MACOSX_BUNDLE TRUE
 		MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_SOURCE_DIR}/MacOSXBundleInfo.plist.in"
 		MACOSX_BUNDLE_BUNDLE_NAME "CloudGTA Player"
