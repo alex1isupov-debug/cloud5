@@ -3,7 +3,7 @@ name: Build CloudGTA managed host
 on:
   workflow_dispatch:
   push:
-    branches: ["cloudgta/lab-mvp"]
+    branches: ["main"]
 
 jobs:
   windows-host:
