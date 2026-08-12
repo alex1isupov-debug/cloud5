@@ -100,6 +100,16 @@ int real_main(int argc, char *argv[])
 	qputenv("ANV_VIDEO_DECODE", "1");
 	qputenv("RADV_PERFTEST", "video_decode");
 #endif
+#ifdef CHIAKI_CLOUDGTA_MANAGED_HOST_ONLY
+	// The installer self-test must not initialize audio, graphics or Qt. Some
+	// Windows drivers can block during that initialization before the test has
+	// a chance to run.
+	for(int i = 1; i < argc; ++i)
+	{
+		if(strcmp(argv[i], "--cloudgta-host-self-test") == 0)
+			return CloudGTAHostSelfTest();
+	}
+#endif
 #ifdef CHIAKI_GUI_ENABLE_STEAMDECK_NATIVE
 	if (qEnvironmentVariableIsSet("SteamDeck"))
 		qputenv("QT_IM_MODULE", "sdinput");
